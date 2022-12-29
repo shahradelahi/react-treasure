@@ -1,12 +1,12 @@
 {
   "name": "react-treasure",
   "description": "Share and manage your data across children components",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "peerDependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": "*",
+    "react-dom": "*"
   },
   "repository": {
     "type": "git",
