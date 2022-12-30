@@ -1,4 +1,4 @@
-import React from "react";
+const React = require('react');
 
 const TreasureContext = React.createContext({
    setRecord: (key, value) => {
@@ -7,7 +7,7 @@ const TreasureContext = React.createContext({
    records: {}
 });
 
-export function TreasureProvider(props) {
+function TreasureProvider(props) {
    const [treasure, setTreasure] = React.useState(Object.assign({}, props.initialRecords));
    const setRecord = (key, value) => {
       setTreasure(Object.assign(Object.assign({}, treasure), {[key]: value}));
@@ -19,7 +19,7 @@ export function TreasureProvider(props) {
    return (React.createElement(TreasureContext.Provider, {value: value}, props.children));
 }
 
-export function useTreasure(key, initialValue) {
+function useTreasure(key, initialValue) {
    const treasure = React.useContext(TreasureContext);
    const set = React.useCallback((value) => {
       treasure.setRecord(key, value);
@@ -28,4 +28,8 @@ export function useTreasure(key, initialValue) {
    return [value, set];
 }
 
-export default TreasureContext;
+module.exports = {
+   default: TreasureContext,
+   TreasureProvider,
+   useTreasure
+};
