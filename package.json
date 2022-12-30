@@ -1,7 +1,7 @@
 {
   "name": "react-treasure",
   "description": "Share and manage your data across children components",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "peerDependencies": {
@@ -23,9 +23,6 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/shahradelahi/react-treasure/issues"
-  },
-  "esnext": {
-    "main": "src/index.js"
   },
   "homepage": "https://github.com/litehex/mongodb#readme"
 }

@@ -1,4 +1,4 @@
-import React from "react";
+const React = require('react');
 
 const TreasureContext = React.createContext({
    setRecord: (key, value) => {
