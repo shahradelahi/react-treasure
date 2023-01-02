@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/shahradelahi/react-treasure/issues"
   },
-  "homepage": "https://github.com/litehex/mongodb#readme"
+  "homepage": "https://github.com/litehex/mongodb#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.18"
+  }
 }

@@ -1,4 +1,5 @@
 const React = require('react');
+const Crypto = require('crypto');
 
 const TreasureContext = React.createContext({
    setRecord: (key, value) => {
@@ -7,7 +8,7 @@ const TreasureContext = React.createContext({
    records: {}
 });
 
-function TreasureProvider(props) {
+function Provider(props) {
    const [treasure, setTreasure] = React.useState(Object.assign({}, props.initialRecords));
    const setRecord = (key, value) => {
       setTreasure(Object.assign(Object.assign({}, treasure), {[key]: value}));
@@ -28,8 +29,16 @@ function useTreasure(key, initialValue) {
    return [value, set];
 }
 
+function Treasure(initialValue) {
+   const uuid = Crypto.randomBytes(16).toString('hex');
+   return {
+      uuid,
+      use: () => useTreasure(uuid, initialValue)
+   };
+}
+
 module.exports = {
-   default: TreasureContext,
-   TreasureProvider,
-   useTreasure
+   useTreasure,
+   Treasure,
+   Provider
 };

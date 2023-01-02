@@ -13,7 +13,7 @@ npm install react-treasure
 Before you can use the `Treasure` you need to wrap your application/parent component with the `TreasureProvider`.
 
 ```jsx
-import { TreasureProvider } from "react-treasure";
+import { Provider } from "react-treasure";
 
 const defaultUser = {
    name: "John Doe",
@@ -22,9 +22,9 @@ const defaultUser = {
 
 function App() {
    return (
-       <TreasureProvider initialData={{user: defaultUser}}>
+       <Provider initialData={{user: defaultUser}}>
           <User />
-       </TreasureProvider>
+       </Provider>
    );
 }
 ```
