@@ -1,34 +1,42 @@
 const React = require('react');
 const Crypto = require('crypto');
 
+// Create a context for the treasure records
 const TreasureContext = React.createContext({
-   setRecord: (key, value) => {
-      throw new Error('TreasureContext not initialized');
+   setRecord: () => {
+      throw new Error('setRecord function called outside of TreasureContext.Provider');
    },
    records: {}
 });
 
-function Provider(props) {
-   const [treasure, setTreasure] = React.useState(Object.assign({}, props.initialRecords));
+// Provider component to provide the treasure state
+function Provider({ initialRecords, children }) {
+   const [treasure, setTreasure] = React.useState({ ...initialRecords });
+
    const setRecord = (key, value) => {
-      setTreasure(Object.assign(Object.assign({}, treasure), {[key]: value}));
+      setTreasure(prevTreasure => ({ ...prevTreasure, [key]: value }));
    };
-   const value = {
+
+   const value = React.useMemo(() => ({
       records: treasure,
       setRecord
-   };
-   return (React.createElement(TreasureContext.Provider, {value: value}, props.children));
+   }), [treasure]);
+
+   return <TreasureContext.Provider value={value}>{children}</TreasureContext.Provider>;
 }
 
+// Custom hook to use the treasure
 function useTreasure(key, initialValue) {
-   const treasure = React.useContext(TreasureContext);
-   const set = React.useCallback((value) => {
-      treasure.setRecord(key, value);
-   }, [treasure, key]);
-   const value = treasure.records[key] || initialValue;
-   return [value, set];
+   const { records, setRecord } = React.useContext(TreasureContext);
+
+   const set = React.useCallback(value => {
+      setRecord(key, value);
+   }, [setRecord, key]);
+
+   return [records[key] || initialValue, set];
 }
 
+// Function to create a unique treasure with an initial value
 function Treasure(initialValue) {
    const uuid = Crypto.randomBytes(16).toString('hex');
    return {
