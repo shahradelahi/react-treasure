@@ -2,11 +2,38 @@
   "name": "react-treasure",
   "description": "Share and manage your data across children components",
   "version": "1.0.0",
-  "main": "src/index.js",
-  "types": "src/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsup"
+  },
+  "packageManager": "pnpm@8.11.0",
   "peerDependencies": {
     "react": "*",
     "react-dom": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.2.44",
+    "@types/react-dom": "^18.2.17",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
   },
   "repository": {
     "type": "git",
@@ -24,8 +51,5 @@
   "bugs": {
     "url": "https://github.com/shahradelahi/react-treasure/issues"
   },
-  "homepage": "https://github.com/litehex/mongodb#readme",
-  "devDependencies": {
-    "@types/node": "^18.11.18"
-  }
+  "homepage": "https://github.com/litehex/mongodb#readme"
 }
