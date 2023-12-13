@@ -1,5 +1,5 @@
-import React from "react";
-import { ProviderProps } from "./typings";
+import React from 'react';
+import { ProviderProps } from './typings';
 
 // Create a context for the treasure records
 const TreasureContext = React.createContext({
@@ -11,35 +11,43 @@ const TreasureContext = React.createContext({
 
 // Provider component to provide the treasure state
 function Provider({ initialRecords, children }: ProviderProps) {
-  const [ treasure, setTreasure ] = React.useState({ ...initialRecords });
+  const [treasure, setTreasure] = React.useState({ ...initialRecords });
 
   const setRecord = (key: string, value: any): void => {
     setTreasure((prevTreasure: object) => ({ ...(prevTreasure || {}), [key]: value }));
   };
 
-  const value = React.useMemo(() => ({
-    records: treasure,
-    setRecord
-  }), [ treasure ]);
+  const value = React.useMemo(
+    () => ({
+      records: treasure,
+      setRecord
+    }),
+    [treasure]
+  );
 
   return <TreasureContext.Provider value={value}> {children} </TreasureContext.Provider>;
 }
 
 // Custom hook to use the treasure
-function useTreasure<T = any>(key: string, initialValue?: T): [ T, (value: T) => void ] {
+function useTreasure<T = any>(key: string, initialValue?: T): [T, (value: T) => void] {
   const { records, setRecord } = React.useContext(TreasureContext);
 
-  const set = React.useCallback((value: any) => {
-    setRecord(key, value);
-  }, [ setRecord, key ]);
+  const set = React.useCallback(
+    (value: any) => {
+      setRecord(key, value);
+    },
+    [setRecord, key]
+  );
 
-  return [ records[key] || initialValue, set ];
+  return [records[key] || initialValue, set];
 }
 
 // Function to create a unique treasure with an initial value
-function Treasure<T = any>(initialValue: T): {
+function Treasure<T = any>(
+  initialValue: T
+): {
   uuid: string;
-  use: () => [ T, (value: T) => void ];
+  use: () => [T, (value: T) => void];
 } {
   const id = React.useId();
   return {
@@ -50,9 +58,4 @@ function Treasure<T = any>(initialValue: T): {
 
 export * from './typings';
 
-export {
-  useTreasure,
-  Treasure,
-  Provider
-}
-
+export { useTreasure, Treasure, Provider };

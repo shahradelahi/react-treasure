@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export type TreasureContext<T = any> = {
   records: Record<string, T>;
@@ -8,6 +8,3 @@ export type TreasureContext<T = any> = {
 export type ProviderProps<T = any> = React.PropsWithChildren<{
   initialRecords?: Record<string, T>;
 }>;
-
-
-
