@@ -1,7 +1,7 @@
 {
   "name": "react-treasure",
   "description": "Share and manage your data across children components",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.1",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -21,7 +21,10 @@
     }
   },
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
+    "prepublishOnly": "pnpm run format:check && pnpm run build"
   },
   "packageManager": "pnpm@8.11.0",
   "peerDependencies": {
@@ -32,6 +35,7 @@
     "@types/node": "^18.11.18",
     "@types/react": "^18.2.44",
     "@types/react-dom": "^18.2.17",
+    "prettier": "^3.1.1",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3"
   },
